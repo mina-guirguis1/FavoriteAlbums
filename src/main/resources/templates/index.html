@@ -20,6 +20,7 @@
 				<th> Album name </th>
 				<th>Artist</th>
 				<th>Number of songs</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,6 +28,9 @@
 					<td th:text="${album.album_name}"></td>
 					<td th:text="${album.artist}"></td>
 					<td th:text="${album.numOfSongs}"></td>
+					<td> <a th:href="@{/showFormForUpdate/{id}(id=${album.id})}" class="btn btn-primary">Update </a>
+					
+					</td>
 				</tr>			
 		</tbody>
 	

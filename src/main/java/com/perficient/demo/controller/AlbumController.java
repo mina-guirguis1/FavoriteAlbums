@@ -59,6 +59,17 @@ public class AlbumController {
 		albumService.saveAlbum(album);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/showFormForUpdate/{id}")
+	public String showFormForUpdate(@PathVariable (value = "id") long id, Model model ) {
+		
+		//get album from service 
+		Album album = albumService.getAlbumById(id);
+		
+		model.addAttribute("album", album);
+		
+		return "updateAlbum";
+	}
 
 	// get all albums
 	@GetMapping
