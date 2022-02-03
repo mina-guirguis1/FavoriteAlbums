@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,9 @@ import com.perficient.demo.model.Album;
 import com.perficient.demo.service.AlbumService;
 
 
-@RestController
-@RequestMapping("/api/albums")
+//@RestController
+//@RequestMapping("/api/albums")
+@Controller
 public class AlbumController {
 
 	private AlbumService albumService;
@@ -29,7 +31,6 @@ public class AlbumController {
 	@GetMapping("/")
 	public String viewHomePag(Model model) {
 		model.addAttribute("listAlbums", albumService.getAllAlbums());
-		System.out.print("got here");
 		return "index";
 	}
 
@@ -44,6 +45,20 @@ public class AlbumController {
 		return new ResponseEntity<Album>(albumService.saveAlbum(album), HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/showNewAlbumForm")
+	public String showNewAlbumForm(Model model) {
+		Album album = new Album();
+		model.addAttribute("album", album);
+		return "newAlbum";
+		
+	}
+	
+	@PostMapping("/saveAlbum")
+	public String saveAlbumString(@ModelAttribute("album") Album album) {
+		//save album to DB
+		albumService.saveAlbum(album);
+		return "redirect:/";
+	}
 
 	// get all albums
 	@GetMapping
@@ -52,7 +67,7 @@ public class AlbumController {
 	}
 	
 	//get album by ID
-	@GetMapping("{id}")
+	@GetMapping("/api/albums/{id}")
 	public ResponseEntity<Album> getAlbumById(@PathVariable("id") long id) {
 		return new ResponseEntity<Album>(albumService.getAlbumById(id), HttpStatus.OK);
 	}
