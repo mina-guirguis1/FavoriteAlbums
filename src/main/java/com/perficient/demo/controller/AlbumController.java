@@ -1,5 +1,6 @@
 package com.perficient.demo.controller;
 
+import java.security.PublicKey;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,14 @@ public class AlbumController {
 		
 	}
 	
+	@GetMapping("/deleteAlbum/{id}")
+	public String deleteAlbum(@PathVariable (value = "id") long id) {
+		
+		this.albumService.deleteAlbum(id);
+		
+		return "redirect:/";
+	}
+	
 	@PostMapping("/saveAlbum")
 	public String saveAlbumString(@ModelAttribute("album") Album album) {
 		//save album to DB
@@ -90,11 +99,11 @@ public class AlbumController {
 	}
 	
 	//delete album
-	@DeleteMapping("{id}")
-	public ResponseEntity<String> deleteAlbum(@PathVariable("id") long id) {
-		
-		albumService.deleteAlbum(id);
-		
-		return new ResponseEntity<String>("Album deleted successfully", HttpStatus.OK);
-	}
+//	@DeleteMapping("{id}")
+//	public ResponseEntity<String> deleteAlbum(@PathVariable("id") long id) {
+//		
+//		albumService.deleteAlbum(id);
+//		
+//		return new ResponseEntity<String>("Album deleted successfully", HttpStatus.OK);
+//	}
 }

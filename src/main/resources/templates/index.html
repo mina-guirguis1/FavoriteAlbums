@@ -29,7 +29,7 @@
 					<td th:text="${album.artist}"></td>
 					<td th:text="${album.numOfSongs}"></td>
 					<td> <a th:href="@{/showFormForUpdate/{id}(id=${album.id})}" class="btn btn-primary">Update </a>
-					
+						<a th:href="@{/deleteAlbum/{id}(id=${album.id})}" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>			
 		</tbody>
